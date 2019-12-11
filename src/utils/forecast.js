@@ -10,7 +10,10 @@ const getCurrentForcast = (latitude, longitude, callback) => {
             callback(`Unable to find longitude and latitude`, undefined)
         }
         else {
-            callback(undefined, (`${body.daily.data[0].summary}, rain possibility is ${body.currently.precipProbability}% and  temperature is ${body.currently.temperature} degrees`))
+            const fernhit = body.currently.temperature
+            const celcius = (5 / 9) * (fernhit - 32)
+            const celciusDouble = Math.round(celcius * 100) / 100
+            callback(undefined, (`${body.daily.data[0].summary}, rain possibility is ${body.currently.precipProbability}% and  temperature is ${celciusDouble} degrees`))
         }
     })
 }
